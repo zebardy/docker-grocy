@@ -49,7 +49,7 @@ class DatabaseService
 	{
 		if ($this->DbConnectionRaw == null)
 		{
-			$pdo = new \PDOWrap('sqlite:' . $this->GetDbFilePath());
+			$pdo = new PDOWrap('sqlite:' . $this->GetDbFilePath());
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			$this->DbConnectionRaw = $pdo;
 		}
