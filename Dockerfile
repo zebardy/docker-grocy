@@ -49,6 +49,7 @@ RUN \
 
 # copy local files
 COPY root/ /
+COPY ./DatabaseService.php /app/grocy/services/
 
 # ports and volumes
 EXPOSE 6781
