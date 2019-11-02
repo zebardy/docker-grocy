@@ -52,7 +52,7 @@ class DatabaseService
 	public function ExecuteDbStatement(string $sql)
 	{
 		$pdo = $this->GetDbConnectionRaw();
-        $fp = fopen('/www/data/sql.log', 'a');
+        $fp = fopen('/config/data/sql.log', 'a');
         fwrite($fp, "$sql\n");
         $time_start = microtime(true);
 		if ($pdo->exec($sql) === false)
@@ -71,7 +71,7 @@ class DatabaseService
 	public function ExecuteDbQuery(string $sql)
 	{
 		$pdo = $this->GetDbConnectionRaw();
-        $fp = fopen('/www/data/sql.log', 'a');
+        $fp = fopen('/config/data/sql.log', 'a');
         fwrite($fp, "$sql\n");
         $time_start = microtime(true);
 		if ($this->ExecuteDbStatement($sql) === true)
