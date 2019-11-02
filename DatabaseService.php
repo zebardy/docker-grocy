@@ -17,7 +17,7 @@ class PDOWrap
 		$result = null;
 
 		$fp = fopen('/config/data/sql.log', 'a');
-		fwrite($fp, "PDO::".$name." called");
+		fwrite($fp, "PDO::".$name." called with arguments:- ".implode( ", ", $pars));
 		$time_start = microtime(true);
 		if(in_array($name, array("exec","query")))
 		{
