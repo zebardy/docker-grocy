@@ -9,7 +9,7 @@ class PDOWrap
 	private $instance = null;
 	public function __construct(){
 		$pars = func_get_args();
-		$this->instance = is_object($obj='PDO')?$obj:new $obj($pars);
+		$this->instance = is_object($obj='PDO')?$obj:new $obj(array_values($pars));
 	}
 
 	public function __call($name,$pars){
