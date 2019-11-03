@@ -13,7 +13,7 @@ class PDOWrap
 			$pars[0],
 			null,
 			null,
-			array(PDO::ATTR_PERSISTENT => true)
+			array(\PDO::ATTR_PERSISTENT => true)
 		);
 		return $this;
 	}
@@ -58,19 +58,19 @@ class DatabaseService
 	 */
 	public function GetDbConnectionRaw()
 	{
-		if ($DbConnectionRaw == null)
+		if (\Grocy\Services::$DbConnectionRaw == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
 			fwrite($fp, "+++Creating new PDO object\n");
 			$pdo = new PDOWrap('sqlite:' . $this->GetDbFilePath());
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-			$DbConnectionRaw = $pdo;
+			\Grocy\Services::$DbConnectionRaw = $pdo;
 			fwrite($fp, "+++object created\n");
 			fwrite($fp, "+++Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
 			fclose($fp);
 		}
 
-		return $DbConnectionRaw;
+		return \Grocy\Services::$DbConnectionRaw;
 	}
 
 	#private $DbConnection;
@@ -79,17 +79,17 @@ class DatabaseService
 	 */
 	public function GetDbConnection()
 	{
-		if ($DbConnection == null)
+		if (\Grocy\Services::$DbConnection == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
 			fwrite($fp, "---creating new LessQL::Database object\n");
-			$DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
+			\Grocy\Services::$DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
 			fwrite($fp, "---object created\n");
 			fwrite($fp, "---Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
 			fclose($fp);
 		}
 
-		return $DbConnection;
+		return \Grocy\Services::$DbConnection;
 	}
 
 	/**
