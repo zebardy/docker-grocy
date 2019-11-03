@@ -26,7 +26,7 @@ class PDOWrap
 		}else{
 			$result = call_user_func_array([$this->instance,$name],$pars);
 		}
-		fwrite($fp, "Total execution time in seconds: " . (microtime(true) - $time_start) . "\n");
+		fwrite($fp, "Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
 		fclose($fp);
 		return $result;
 	}
@@ -52,9 +52,13 @@ class DatabaseService
 	{
 		if ($this->DbConnectionRaw == null)
 		{
+			$fp = fopen('/config/data/sql.log', 'a');
+			fwrite($fp, "+++Creating new PDO object\n");
 			$pdo = new PDOWrap('sqlite:' . $this->GetDbFilePath());
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			$this->DbConnectionRaw = $pdo;
+			fwrite($fp, "+++object created\n");
+			fclose($fp);
 		}
 
 		return $this->DbConnectionRaw;
