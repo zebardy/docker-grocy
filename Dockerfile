@@ -50,6 +50,7 @@ RUN \
 # copy local files
 COPY root/ /
 COPY ./DatabaseService.php /app/grocy/services/
+COPY ./StockController.php /app/grocy/controllers/
 
 # ports and volumes
 EXPOSE 6781
