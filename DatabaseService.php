@@ -32,6 +32,9 @@ class PDOWrap
 	}
 }
 
+$DbConnectionRaw = null;
+$DbConnection = null;
+
 class DatabaseService
 {
 	private function GetDbFilePath()
@@ -44,42 +47,42 @@ class DatabaseService
 		return GROCY_DATAPATH . '/grocy.db';
 	}
 
-	private $DbConnectionRaw;
+	#private $DbConnectionRaw;
 	/**
 	 * @return \PDO
 	 */
 	public function GetDbConnectionRaw()
 	{
-		if ($this->DbConnectionRaw == null)
+		if ($DbConnectionRaw == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
 			fwrite($fp, "+++Creating new PDO object\n");
 			$pdo = new PDOWrap('sqlite:' . $this->GetDbFilePath());
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-			$this->DbConnectionRaw = $pdo;
+			$DbConnectionRaw = $pdo;
 			fwrite($fp, "+++object created\n");
 			fclose($fp);
 		}
 
-		return $this->DbConnectionRaw;
+		return $DbConnectionRaw;
 	}
 
-	private $DbConnection;
+	#private $DbConnection;
 	/**
 	 * @return \LessQL\Database
 	 */
 	public function GetDbConnection()
 	{
-		if ($this->DbConnection == null)
+		if ($DbConnection == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
 			fwrite($fp, "creating new LessQL::Database object\n");
-			$this->DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
+			$DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
 			fwrite($fp, "object created\n");
 			fclose($fp);
 		}
 
-		return $this->DbConnection;
+		return $DbConnection;
 	}
 
 	/**
