@@ -68,7 +68,11 @@ class DatabaseService
 	{
 		if ($this->DbConnection == null)
 		{
+			$fp = fopen('/config/data/sql.log', 'a');
+			fwrite($fp, "creating new LessQL::Database object\n");
 			$this->DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
+			fwrite($fp, "object created\n");
+			fclose($fp);
 		}
 
 		return $this->DbConnection;
