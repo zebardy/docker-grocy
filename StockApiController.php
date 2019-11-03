@@ -119,7 +119,7 @@ class StockApiController extends BaseApiController
 
 		$result = null;
 
-		$fp = fopen('/www/data/sql.log', 'a');
+		$fp = fopen('/config/data/sql.log', 'a');
         fwrite($fp, "???executing api consume product");
         $time_start = microtime(true);
 
