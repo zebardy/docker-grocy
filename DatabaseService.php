@@ -37,8 +37,8 @@ class PDOWrap
 	}
 }
 
-$DbConnectionRaw = null;
-$DbConnection = null;
+#$DbConnectionRaw = null;
+#$DbConnection = null;
 
 class DatabaseService
 {
@@ -53,13 +53,13 @@ class DatabaseService
 	}
 
 	#private $DbConnectionRaw;
-	var $DbConnectionRaw;
+	private static $DbConnectionRaw = null;
 	/**
 	 * @return \PDO
 	 */
 	public function GetDbConnectionRaw()
 	{
-		if ($DbConnectionRaw == null)
+		if (self::$DbConnectionRaw == null)
 		#if ($this->DbConnectionRaw == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
@@ -67,38 +67,38 @@ class DatabaseService
 			$time_start = microtime(true);
 			$pdo = new PDOWrap('sqlite:' . $this->GetDbFilePath());
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-			$DbConnectionRaw = $pdo;
+			self::$DbConnectionRaw = $pdo;
 			#$this->DbConnectionRaw = $pdo;
 			fwrite($fp, "+++Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
 			fwrite($fp, "+++object created\n");
 			fclose($fp);
 		}
 
-		return $DbConnectionRaw;
+		return self::$DbConnectionRaw;
 		#return $this->DbConnectionRaw;
 	}
 
 	#private $DbConnection;
-	var $DbConnection;
+	private static $DbConnection = null;
 	/**
 	 * @return \LessQL\Database
 	 */
 	public function GetDbConnection()
 	{
-		if ($DbConnection == null)
+		if (self::$DbConnection == null)
 		#if ($this->DbConnection == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
 			fwrite($fp, "---creating new LessQL::Database object\n");
 			$time_start = microtime(true);
-			$DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
+			self::$DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
 			#$this->DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
 			fwrite($fp, "---Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
 			fwrite($fp, "---object created\n");
 			fclose($fp);
 		}
 
-		return $DbConnection;
+		return self::$DbConnection;
 		#return $this->DbConnection;
 	}
 
