@@ -9,7 +9,12 @@ class PDOWrap
 	private $instance = null;
 	public function __construct(){
 		$pars = func_get_args();
-		$this->instance = is_object($obj='PDO')?$obj:new $obj($pars[0]);
+		$this->instance = is_object($obj='PDO')?$obj:new $obj(
+			$pars[0],
+			null,
+			null,
+			array(PDO::ATTR_PERSISTENT => true)
+		);
 		return $this;
 	}
 
@@ -61,6 +66,7 @@ class DatabaseService
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			$DbConnectionRaw = $pdo;
 			fwrite($fp, "+++object created\n");
+			fwrite($fp, "+++Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
 			fclose($fp);
 		}
 
@@ -76,9 +82,10 @@ class DatabaseService
 		if ($DbConnection == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
-			fwrite($fp, "creating new LessQL::Database object\n");
+			fwrite($fp, "---creating new LessQL::Database object\n");
 			$DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
-			fwrite($fp, "object created\n");
+			fwrite($fp, "---object created\n");
+			fwrite($fp, "---Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
 			fclose($fp);
 		}
 
