@@ -53,7 +53,7 @@ class DatabaseService
 	}
 
 	#private $DbConnectionRaw;
-	$DbConnectionRaw;
+	var $DbConnectionRaw;
 	/**
 	 * @return \PDO
 	 */
@@ -79,7 +79,7 @@ class DatabaseService
 	}
 
 	#private $DbConnection;
-	$DbConnection;
+	var $DbConnection;
 	/**
 	 * @return \LessQL\Database
 	 */
