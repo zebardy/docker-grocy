@@ -52,50 +52,54 @@ class DatabaseService
 		return GROCY_DATAPATH . '/grocy.db';
 	}
 
-	private $DbConnectionRaw;
+	#private $DbConnectionRaw;
+	$DbConnectionRaw;
 	/**
 	 * @return \PDO
 	 */
 	public function GetDbConnectionRaw()
 	{
-		#if (\Grocy\Services\DbConnectionRaw == null)
-		if ($this->DbConnectionRaw == null)
+		if ($DbConnectionRaw == null)
+		#if ($this->DbConnectionRaw == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
 			fwrite($fp, "+++Creating new PDO object\n");
+			$time_start = microtime(true);
 			$pdo = new PDOWrap('sqlite:' . $this->GetDbFilePath());
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-			#\Grocy\Services\DbConnectionRaw = $pdo;
-			$this->DbConnectionRaw = $pdo;
-			fwrite($fp, "+++object created\n");
+			$DbConnectionRaw = $pdo;
+			#$this->DbConnectionRaw = $pdo;
 			fwrite($fp, "+++Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
+			fwrite($fp, "+++object created\n");
 			fclose($fp);
 		}
 
-		#return \Grocy\Services\DbConnectionRaw;
-		return $this->DbConnectionRaw;
+		return $DbConnectionRaw;
+		#return $this->DbConnectionRaw;
 	}
 
-	private $DbConnection;
+	#private $DbConnection;
+	$DbConnection;
 	/**
 	 * @return \LessQL\Database
 	 */
 	public function GetDbConnection()
 	{
-		#if (\Grocy\Services\DbConnection == null)
-		if ($this->DbConnection == null)
+		if ($DbConnection == null)
+		#if ($this->DbConnection == null)
 		{
 			$fp = fopen('/config/data/sql.log', 'a');
 			fwrite($fp, "---creating new LessQL::Database object\n");
-			#\Grocy\Services\DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
-			$this->DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
-			fwrite($fp, "---object created\n");
+			$time_start = microtime(true);
+			$DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
+			#$this->DbConnection = new \LessQL\Database($this->GetDbConnectionRaw());
 			fwrite($fp, "---Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
+			fwrite($fp, "---object created\n");
 			fclose($fp);
 		}
 
-		#return \Grocy\Services\DbConnection;
-		return $this->DbConnection;
+		return $DbConnection;
+		#return $this->DbConnection;
 	}
 
 	/**
