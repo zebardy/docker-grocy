@@ -52,7 +52,7 @@ COPY root/ /
 COPY ./DatabaseService.php /app/grocy/services/
 COPY ./StockController.php /app/grocy/controllers/
 COPY ./StockApiController.php /app/grocy/controllers/
-COPY ./App.php /app/grocy/
+COPY ./app.php /app/grocy/
 
 # ports and volumes
 EXPOSE 6781
