@@ -82,6 +82,10 @@ $app = new \Slim\App($appContainer);
 // Load routes from separate file
 require_once __DIR__ . '/routes.php';
 
+fwrite($fp, "!!!App starting run\n");
+$run_time_start = microtime(true);
 $app->run();
+fwrite($fp, "!!!App - Total run time in seconds: " . round((microtime(true) - $run_time_start),6) . "\n");
 fwrite($fp, "!!!App - Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
+fwrite($fp, print_r(opcache_get_status(),TRUE)."\n");
 fclose($fp);
