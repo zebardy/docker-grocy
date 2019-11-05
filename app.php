@@ -94,6 +94,7 @@ fwrite($fp, "!!!App - Total dependency load time in seconds: " . $dep_load_time 
 fwrite($fp, "!!!App - Total app creation time in seconds: " . $app_creation_time . "\n");
 fwrite($fp, "!!!App - Total run time in seconds: " . round((microtime(true) - $run_time_start),6) . "\n");
 fwrite($fp, "!!!App - Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
-fwrite($fp, "!!!APP - opcache status: ".print_r(opcache_get_status(),TRUE)."\n");
-fwrite($fp, "!!!APP - opcache config: ".print_r(opcache_get_configuration(),TRUE)."\n");
+fwrite($fp, "!!!APP - ini: ".print_r(ini_get_all(),TRUE)."\n");
+#fwrite($fp, "!!!APP - opcache status: ".print_r(opcache_get_status(),TRUE)."\n");
+#fwrite($fp, "!!!APP - opcache config: ".print_r(opcache_get_configuration(),TRUE)."\n");
 fclose($fp);
