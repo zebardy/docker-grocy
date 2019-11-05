@@ -11,9 +11,9 @@ class StockController extends BaseController
 
 	public function __construct(\Slim\Container $container)
 	{
-		$fp = fopen('/config/data/sql.log', 'a');
-		fwrite($fp, "!!!constructing StockController\n");
-		fclose($fp);
+		#$fp = fopen('/config/data/sql.log', 'a');
+		#fwrite($fp, "!!!constructing StockController\n");
+		#fclose($fp);
 		parent::__construct($container);
 		$this->StockService = new StockService();
 		$this->UserfieldsService = new UserfieldsService();
@@ -51,15 +51,15 @@ class StockController extends BaseController
 
 	public function Consume(\Slim\Http\Request $request, \Slim\Http\Response $response, array $args)
 	{
-		$fp = fopen('/config/data/sql.log', 'a');
-        fwrite($fp, "???executing consume stock");
-		$time_start = microtime(true);
+		#$fp = fopen('/config/data/sql.log', 'a');
+        #fwrite($fp, "???executing consume stock");
+		#$time_start = microtime(true);
 		$result = $this->AppContainer->view->render($response, 'consume', [
 			'products' => $this->Database->products()->orderBy('name'),
 			'recipes' => $this->Database->recipes()->orderBy('name')
 		]);
-		fwrite($fp, "???Consume - Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
-		fclose($fp);
+		#fwrite($fp, "???Consume - Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
+		#fclose($fp);
 	}
 
 	public function Inventory(\Slim\Http\Request $request, \Slim\Http\Response $response, array $args)
