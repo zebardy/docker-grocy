@@ -98,3 +98,5 @@ fwrite($fp, "!!!APP - ini: ".print_r(ini_get_all(),TRUE)."\n");
 #fwrite($fp, "!!!APP - opcache status: ".print_r(opcache_get_status(),TRUE)."\n");
 #fwrite($fp, "!!!APP - opcache config: ".print_r(opcache_get_configuration(),TRUE)."\n");
 fclose($fp);
+
+phpinfo();
