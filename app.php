@@ -80,7 +80,7 @@ $appContainer = new \Slim\Container([
 ]);
 
 #$creation_time_start = microtime(true);
-#$app = new \Slim\App($appContainer);
+$app = new \Slim\App($appContainer);
 #$app_creation_time = round((microtime(true) - $creation_time_start),6);
 
 
