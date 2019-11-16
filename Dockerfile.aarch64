@@ -12,6 +12,15 @@ RUN \
  apk add --no-cache --virtual=build-dependencies \
 	git \
 	composer \
+        python \
+        py-pip \
+        wget \
+        freetype \
+        libpng \
+        libjpeg-turbo \
+        freetype-dev \
+        libpng-dev \
+        libjpeg-turbo-dev \
 	yarn && \
  echo "**** install runtime packages ****" && \
  apk add --no-cache \
