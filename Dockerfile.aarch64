@@ -64,7 +64,7 @@ COPY ./StockController.php /app/grocy/controllers/
 COPY ./StockApiController.php /app/grocy/controllers/
 COPY ./app.php /app/grocy/
 COPY ./routes.php /app/grocy/
-COPY ./SystemApiController.php /app/grocy/Controllers/
+COPY ./SystemApiController.php /app/grocy/controllers/
 
 # ports and volumes
 EXPOSE 6781
