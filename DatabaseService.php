@@ -135,10 +135,11 @@ class DatabaseService
 		$fp = fopen('/config/data/sql.log', 'a');
 		fwrite($fp, "!!!! getting db changed time !!!!\n");
 		$time_start = microtime(true);
-		return date('Y-m-d H:i:s', filemtime($this->GetDbFilePath()));
+		$date_time = date('Y-m-d H:i:s', filemtime($this->GetDbFilePath()));
 		fwrite($fp, "---Total execution time in seconds: " . round((microtime(true) - $time_start),6) . "\n");
 		fwrite($fp, "!!!! time obtained !!!!\n");
 		fclose($fp);
+		return $date_time;
 	}
 
 	public function SetDbChangedTime($dateTime)
