@@ -9,9 +9,15 @@ class SystemApiController extends BaseApiController
 {
 	public function __construct(\Slim\Container $container)
 	{
+		$fp = fopen('/config/data/sql.log', 'a');
+                fwrite($fp, "#### Constructing SystemApiController ####\n");
+                $time_start = microtime(true);
 		parent::__construct($container);
 		$this->DatabaseService = new DatabaseService();
 		$this->ApplicationService = new ApplicationService();
+                fwrite($fp, "-----Total execution time in seconds: " . round((microtime(true) - $time_start),4) . "\n");
+                fwrite($fp, "#### SystemApiController constructed ####\n");
+                fclose($fp);
 	}
 
 	protected $DatabaseService;
