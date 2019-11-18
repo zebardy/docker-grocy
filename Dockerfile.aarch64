@@ -45,6 +45,7 @@ RUN \
  tar xf \
 	/tmp/grocy.tar.gz -C \
 	/app/grocy/ --strip-components=1 && \
+ cp /tmp/grocy.tar.gz /app/ && \
  cp -R /app/grocy/data/plugins \
 	/defaults/plugins && \
  echo "**** install composer packages ****" && \
@@ -66,7 +67,7 @@ COPY root/ /
 #COPY ./StockController.php /app/grocy/controllers/
 #COPY ./StockApiController.php /app/grocy/controllers/
 #COPY ./app.php /app/grocy/
-COPY ./routes.php /app/grocy/
+#COPY ./routes.php /app/grocy/
 #COPY ./SystemApiController.php /app/grocy/controllers/
 
 # ports and volumes
