@@ -29,7 +29,8 @@ RUN \
 	php7-gd \
 	php7-pdo \
 	php7-pdo_sqlite \
-        php7-opcache \
+	php7-opcache \
+	php7-apcu \
 	php7-tokenizer && \
  echo "**** get latest grocy version ****" && \
  mkdir -p /app/grocy && \
