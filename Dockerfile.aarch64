@@ -22,7 +22,7 @@ RUN \
         libpng-dev \
         libjpeg-turbo-dev \
 	yarn && \
- echo "**** install runtime packages! ****" && \
+ echo "**** install runtime packages ****" && \
  apk add --no-cache \
 	curl \
 	php7 \
