@@ -34,12 +34,12 @@ RUN \
 	php7-tokenizer
 
 RUN \
- echo "**** get latest grocy version!!!!!!!!!!!!!!!!!!!!!! ****" && \
+ echo "**** get latest grocy version ****" && \
  mkdir -p /app/grocy && \
- if [ -z ${GROCY_RELEASE+x} ]; then \
-	GROCY_RELEASE=$(curl -sX GET "https://api.github.com/repos/grocy/grocy/releases/latest" \
-	| awk '/tag_name/{print $4;exit}' FS='[""]'); \
- fi && \
+# if [ -z ${GROCY_RELEASE+x} ]; then \
+#	GROCY_RELEASE=$(curl -sX GET "https://api.github.com/repos/grocy/grocy/releases/latest" \
+#	| awk '/tag_name/{print $4;exit}' FS='[""]'); \
+# fi && \
  echo "**** install grocy from fork master branch ****" && \
  curl -o \
 	/tmp/grocy.tar.gz -L \
