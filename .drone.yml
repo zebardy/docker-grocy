@@ -1,0 +1,26 @@
+---
+kind: pipeline
+type: kubernetes
+name: docker-grocy
+
+platform:
+  os: linux
+  arch: aarch64
+
+trigger:
+  branches:
+    - master
+  event:
+    - push
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+    settings:
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: zebardy/linuxserver-grocy
+      dockerfile: Dockerfile.aarch64

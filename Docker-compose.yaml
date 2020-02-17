@@ -1,0 +1,18 @@
+# Usage:
+# docker-compose build && docker-compose up
+version: '2'
+
+services:
+  grocy-nginx:
+    image: grocy/docker-grocy:amd_64_latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    volumes:
+      - ./data_store:/data
+    environment:
+      GROCY_CULTURE: en
+    container_name: docker-grocy
+
